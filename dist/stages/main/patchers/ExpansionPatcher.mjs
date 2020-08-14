@@ -1,0 +1,16 @@
+import { __extends } from "tslib";
+import NodePatcher from './../../../patchers/NodePatcher';
+var ExpansionPatcher = /** @class */ (function (_super) {
+    __extends(ExpansionPatcher, _super);
+    function ExpansionPatcher() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ExpansionPatcher.prototype.patchAsExpression = function () {
+        // Any code handling expansions should process them without calling patch.
+        // If patch ends up being called, then that means that we've hit an
+        // unsupported case that's trying to treat this node as a normal expression.
+        throw this.error('Unexpected traversal of expansion node.');
+    };
+    return ExpansionPatcher;
+}(NodePatcher));
+export default ExpansionPatcher;
